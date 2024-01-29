@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_controllers.AddProductGUIController">
+   <children>
+         <Label layoutX="72.0" layoutY="63.0" prefHeight="39.0" prefWidth="159.0" text="product ID:">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="productID" layoutX="259.0" layoutY="59.0" prefHeight="47.0" prefWidth="198.0" />
+      <Label layoutX="77.0" layoutY="151.0" prefHeight="39.0" prefWidth="187.0" text="product name:">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="productName" layoutX="259.0" layoutY="147.0" prefHeight="47.0" prefWidth="198.0" />
+      <Label layoutX="71.0" layoutY="234.0" prefHeight="39.0" prefWidth="198.0" text="product quantity: ">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="productQty" layoutX="258.0" layoutY="230.0" prefHeight="47.0" prefWidth="198.0" />
+      <Label layoutX="90.0" layoutY="380.0" prefHeight="39.0" prefWidth="187.0" text="Category: ">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="categoryMenu" layoutX="269.0" layoutY="380.0" prefHeight="39.0" prefWidth="159.0" promptText="Alege Categorie" />
+      <Button fx:id="addItemBtn" layoutX="231.0" layoutY="534.0" mnemonicParsing="false" onAction="#addItemBtnAction" prefHeight="69.0" prefWidth="159.0" text="Add Item" />
+      <Button fx:id="finishBtn" layoutX="647.0" layoutY="534.0" mnemonicParsing="false" onAction="#finishBtnAction" prefHeight="69.0" prefWidth="168.0" text="Finish" />
+      <TableView fx:id="productsTable" layoutX="539.0" layoutY="110.0" prefHeight="310.0" prefWidth="333.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="64.0" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="100.800048828125" text="Name" />
+            <TableColumn fx:id="categoryColumn" prefWidth="106.39996337890625" text="Category" />
+            <TableColumn fx:id="qtyColumn" prefWidth="59.9998779296875" text="Quantity" />
+         </columns>
+      </TableView>
+      <Button fx:id="deleteButton" layoutX="478.0" layoutY="556.0" mnemonicParsing="false" onAction="#deleteAllButtonAction" prefHeight="47.0" prefWidth="81.0" text="Delete" />
+      <Button fx:id="addCategoryBtn" layoutX="285.0" layoutY="440.0" mnemonicParsing="false" onAction="#showAddCategoryDialog" prefHeight="39.0" prefWidth="128.0" text="adauga categorie" />
+   </children>
+</AnchorPane>
