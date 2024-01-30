@@ -18,7 +18,10 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,6 +53,8 @@ public class AddProductGUIController {
 	@FXML
 	private ComboBox<Category> categoryMenu;
 	@FXML
+	private ComboBox<String> unit;
+	@FXML
 	private Button addCategoryBtn;
 	
 	@FXML
@@ -63,6 +68,8 @@ public class AddProductGUIController {
 	private TableColumn<Product, String> categoryColumn;
 	@FXML
 	private TableColumn<Product, Integer> qtyColumn;
+	@FXML
+	private TableColumn<Product, String> unitColumn;
 	
 	private Stage stage;
 	private Scene scene;
@@ -73,7 +80,7 @@ public class AddProductGUIController {
 	       this.stage = stage;
  }
 	
-	private void refreshTableView() throws ClassNotFoundException, SQLException {
+	public void refreshTableView() throws ClassNotFoundException, SQLException {
 	    ObservableList<Product> productsList = ProductDAO.retrieveTable();
 	    populateTable(productsList);
 	}
@@ -81,6 +88,7 @@ public class AddProductGUIController {
 	@FXML
 	public void addItemBtnAction(ActionEvent event) throws ClassNotFoundException, SQLException{
 		ObservableList<Product> productList = ProductDAO.retrieveTable();
+		
 	
 		if(productID.getText().isEmpty() || productName.getText().isEmpty() || categoryMenu.getSelectionModel().getSelectedItem() == null || productQty.getText().isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -92,7 +100,12 @@ public class AddProductGUIController {
 		else {
 			try {
 			Category selectedCategory = categoryMenu.getSelectionModel().getSelectedItem();
-			ProductDAO.insertProduct(Integer.parseInt(productID.getText()), productName.getText(), selectedCategory.getNume(), Integer.parseInt(productQty.getText()));
+			String unitName = unit.getSelectionModel().getSelectedItem();
+			LocalDate date = LocalDate.now();
+			DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+			String formatedDate = date.format(formatObj);
+			
+			ProductDAO.insertProduct(Integer.parseInt(productID.getText()), productName.getText(), selectedCategory.getNume(), Integer.parseInt(productQty.getText()), unitName, formatedDate);
 			
 			refreshTableView();
 			
@@ -108,7 +121,7 @@ public class AddProductGUIController {
 				for(Product product : productList) {
 					if(product.getId() == Integer.parseInt(productID.getText()))
 					{
-						Alert alert = new Alert(AlertType.WARNING);
+						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Id error");
 						alert.setHeaderText(null);
 						alert.setContentText("The id you tried to enter already exists");
@@ -156,13 +169,29 @@ public class AddProductGUIController {
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
 		categoryColumn.setCellValueFactory(cellData -> cellData.getValue().getCategoryProperty());
 		qtyColumn.setCellValueFactory(cellData -> cellData.getValue().getQtyProperty().asObject());
+		unitColumn.setCellValueFactory(cellData -> cellData.getValue().getUnitProperty());
 		ObservableList<Product> productsList = ProductDAO.retrieveTable();
 		populateTable(productsList);
 		
 		refreshCategoryList();
+		
+		List<String> unitList = new ArrayList<>(Arrays.asList("kg", "buc"));
+		
+		unit.getItems().addAll(unitList);
+		unit.setCellFactory(lv -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String unitName, boolean empty) {
+                super.updateItem(unitName, empty);
+                if (empty || unitName == null) {
+                    setText(null);
+                } else {
+                    setText(unitName);
+                }
+            }
+        });
 	}
 	
-	private void populateTable(ObservableList<Product> productsList) {
+	void populateTable(ObservableList<Product> productsList) {
 		productsTable.setItems(productsList);
 		idColumn.setSortType(TableColumn.SortType.ASCENDING);
 		productsTable.getSortOrder().add(idColumn);
@@ -177,7 +206,9 @@ public class AddProductGUIController {
             Parent root = loader.load();
             
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root, 1280, 720);
+            scene = new Scene(root, 1080, 720);
+            
+            scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
             
             if(stage != null){
             stage.setScene(scene);
@@ -195,7 +226,7 @@ public class AddProductGUIController {
     }
     
     @FXML
-    public void showAddCategoryDialog(ActionEvent event) throws ClassNotFoundException, SQLException {
+    public void showAddCategoryDialog() throws ClassNotFoundException, SQLException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Add New Category");
         dialog.setHeaderText("Create a new category");
@@ -240,6 +271,9 @@ public class AddProductGUIController {
                 }
             });
         } catch (Exception e) {
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Exception encountered");
+        	alert.setContentText(e.getMessage());
             e.printStackTrace();
         }
     }

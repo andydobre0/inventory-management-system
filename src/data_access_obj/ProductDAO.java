@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 
 public class ProductDAO {
 	
-	public static void insertProduct(Integer ID, String name, String category, Integer quantity) throws ClassNotFoundException, SQLException{
-		String sql = "insert into products (id, name, category, quantity) values('"+ID+"','"+name+"','"+category+"','"+quantity+"')";
+	public static void insertProduct(Integer ID, String name, String category, Integer quantity, String unit, String date) throws ClassNotFoundException, SQLException{
+		String sql = "insert into products (id, name, category, quantity, unit, data) values('"+ID+"','"+name+"','"+category+"','"+quantity+"','"+ unit + "','" + date +"')";
 		
 		try {
 			DBconnection.dbExecuteQuerry(sql);
@@ -49,7 +49,7 @@ public class ProductDAO {
 		}
 	}
 	
-	private static ObservableList<Product> getProducts(ResultSet rs) throws SQLException {
+	public static ObservableList<Product> getProducts(ResultSet rs) throws SQLException {
 		
 		try {
 			
@@ -61,6 +61,8 @@ public class ProductDAO {
 			product.setNameProperty(rs.getString("name"));
 			product.setCategoryProperty(rs.getString("category"));
 			product.setQtyProperty(rs.getInt("quantity"));
+			product.setUnitProperty(rs.getString("unit"));
+			product.setDate(rs.getDate("data"));
 			productsList.add(product);
 		}
 		return productsList;
@@ -71,12 +73,53 @@ public class ProductDAO {
 		}
 	}
 	
-	
-	public static void updateProduct() {
-		
+	public static void updateProductName(String oldVal, String newVal) throws Exception {
+		String sql = "UPDATE products SET name = " + "'" + newVal +"'" + " WHERE name = " + "'"+ oldVal +"'";
+		try {
+			DBconnection.dbExecuteQuerry(sql);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
-	public static void deleteProduct() {
+	public static void updateProductQty(Integer id,Integer newVal) throws Exception{
+		String sql = "UPDATE products SET quantity = " + newVal + " WHERE id = " + id;
+		try {
+			DBconnection.dbExecuteQuerry(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateUnit(Integer id, String newVal) throws Exception{
+		String sql = "UPDATE products SET unit = " + "'" + newVal +"' WHERE id = " + id;
+		try {
+			DBconnection.dbExecuteQuerry(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateProductCategory(Integer id, String newVal) throws ClassNotFoundException, SQLException {
+		String sql = "UPDATE products SET category = " + "'" + newVal + "'" + " WHERE id = " + id;
 		
+		try{
+			DBconnection.dbExecuteQuerry(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ObservableList<Product> getLowQtyProducts() throws Exception{
+		String sql = "SELECT * FROM products WHERE quantity < 5";
+		
+		try {
+			ResultSet rs = DBconnection.retrieveData(sql);
+			ObservableList<Product> productsList = getProducts(rs);
+			return productsList;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

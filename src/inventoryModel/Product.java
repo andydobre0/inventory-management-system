@@ -1,5 +1,9 @@
 package inventoryModel;
 
+import java.sql.Date;
+
+//import java.util.Date;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,7 +17,8 @@ public class Product {
 	private StringProperty categoryProperty;
 	private DoubleProperty priceProperty;
 	private IntegerProperty qtyProperty;
-	
+	private StringProperty unitProperty; 
+	private Date date;
 	
 	
 	public Product() {
@@ -22,6 +27,7 @@ public class Product {
 		this.nameProperty = new SimpleStringProperty();
 		this.categoryProperty = new SimpleStringProperty();
 		this.qtyProperty = new SimpleIntegerProperty();
+		this.unitProperty = new SimpleStringProperty();
 	}
 	
 	public Integer getId() {
@@ -78,4 +84,21 @@ public class Product {
 		this.qtyProperty.set(quantity);;
 	}
 	
+	public String getUnit() {
+		return unitProperty.get();
+	}
+	public StringProperty getUnitProperty() {
+		return unitProperty;
+	}
+	public void setUnitProperty(String unit) {
+		this.unitProperty.set(unit);
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 }
