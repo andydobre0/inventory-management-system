@@ -3,7 +3,6 @@ package data_access_obj;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import db_connection.DBconnection;
 import inventoryModel.Category;
