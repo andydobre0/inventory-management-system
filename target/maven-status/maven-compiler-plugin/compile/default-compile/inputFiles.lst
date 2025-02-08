@@ -1,0 +1,12 @@
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/inventoryModel/Category.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/data_access_obj/ProductDAO.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/ui_controllers/SwitchScenesController.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/com/example/App.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/ui_controllers/AddProductGUIController.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/inventoryModel/Product.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/ui_controllers/ProductManagerGUIController.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/inventoryModel/InventoryManager.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/application/Main.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/ui_controllers/InventoryGUIController.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/db_connection/DBconnection.java
+/home/andy/uvt_an3/sem1/proiect_individual/inventory-management-system/src/main/java/data_access_obj/CategoryDAO.java

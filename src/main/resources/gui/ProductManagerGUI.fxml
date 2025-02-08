@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_controllers.ProductManagerGUIController">
+   <children>
+      <TableView fx:id="productsTable" layoutX="45.0" layoutY="62.0" prefHeight="378.0" prefWidth="483.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="79.99999618530273" text="ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="103.19998168945312" text="Name" />
+            <TableColumn fx:id="categoryColumn" prefWidth="115.20002746582031" text="Category" />
+            <TableColumn fx:id="qtyColumn" prefWidth="96.79998779296875" text="Quantity" />
+            <TableColumn fx:id="unitColumn" prefWidth="96.79998779296875" text="Unit" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchProductBar" layoutX="618.0" layoutY="62.0" prefHeight="46.0" prefWidth="182.0" promptText="search product" />
+      <Button fx:id="searchProductBtn" layoutX="821.0" layoutY="72.0" mnemonicParsing="false" onAction="#searchBtnAction" text="Search" />
+      <Button fx:id="decreaseBtn" layoutX="735.0" layoutY="291.0" mnemonicParsing="false" onAction="#decreaseBtnAction" prefHeight="46.0" prefWidth="172.0" text="decrease quantity by 1 unit" />
+      <Button fx:id="increaseBtn" layoutX="735.0" layoutY="220.0" mnemonicParsing="false" onAction="#increaseBtnAction" prefHeight="46.0" prefWidth="172.0" text="increase quantity by 1 unit" />
+      <Button fx:id="deleteBtn" layoutX="480.0" layoutY="512.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="26.0" prefWidth="87.0" text="delete" />
+      <Button fx:id="lowQtyBtn" layoutX="102.0" layoutY="478.0" mnemonicParsing="false" onAction="#lowQtyBtnAction" prefHeight="46.0" prefWidth="201.0" text="show low quantity products" />
+      <Button fx:id="allProductsBtn" layoutX="102.0" layoutY="550.0" mnemonicParsing="false" onAction="#allProductsBtnAction" prefHeight="46.0" prefWidth="202.0" text="show all products" />
+      <Button fx:id="finishBtn" layoutX="789.0" layoutY="494.0" mnemonicParsing="false" onAction="#finishBtnAction" prefHeight="62.0" prefWidth="101.0" text="Finish" />
+   </children>
+</AnchorPane>
